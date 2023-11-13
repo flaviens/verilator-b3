@@ -1,0 +1,45 @@
+// Copyright 2023 Flavien Solt, ETH Zurich.
+// Licensed under the General Public License, Version 3.0, see LICENSE for details.
+// SPDX-License-Identifier: GPL-3.0-only
+
+#include "Vtop.h"
+#include "verilated.h"
+
+#include <iostream>
+#include <stdlib.h>
+#include <fstream>
+#include <cassert>
+
+typedef Vtop Module;
+
+int run_test(Module *my_module) {
+
+  my_module->in_data = 0bTEMPLATE_IN_DATA;
+  my_module->eval();
+  int output_bit = my_module->out_data;
+  return output_bit;
+}
+
+int main(int argc, char **argv, char **env) {
+
+  Verilated::commandArgs(argc, argv);
+  Verilated::traceEverOn(VM_TRACE);
+
+  ////////
+  // Instantiate the module.
+  ////////
+
+  Module *my_module = new Module;
+
+  ////////
+  // Run the experiment.
+  ////////
+
+  int output_bit = run_test(my_module);
+
+  std::cout << "Testbench complete!" << std::endl;
+  std::cout << "Output bit: " << std::dec << output_bit << "." << std::endl;
+
+  delete my_module;
+  exit(0);
+}

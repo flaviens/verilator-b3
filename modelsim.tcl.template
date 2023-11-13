@@ -1,0 +1,4 @@
+vlog -64 -sv -work TEMPLATE_DIR/work -ccflags '-std=c++11' -sv TEMPLATE_DIR/top.sv TEMPLATE_DIR/tb_icarus.sv
+vsim -64 -lib TEMPLATE_DIR/work testbench
+run -a
+quit -f

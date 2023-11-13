@@ -1,0 +1,24 @@
+module testbench;
+
+  // localparam int unsigned SIMLEN = 1;
+
+  logic [2:0] in_data;
+  logic out_data;
+
+  top dut(in_data, out_data);
+
+  // Stimulus generation
+  initial begin
+
+    // $dumpfile("out.vcd");
+    // $dumpvars(0,dut);
+
+    in_data = 3'bTEMPLATE_IN_DATA;
+
+    #1;
+
+    $display("Output bit: %d.", out_data);
+    
+  end
+
+endmodule
